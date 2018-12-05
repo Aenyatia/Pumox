@@ -15,6 +15,14 @@ namespace Pumox.Controllers
 			_companyService = companyService;
 		}
 
+		// test method
+		[HttpGet]
+		public IActionResult Get()
+		{
+			var companies = _companyService.Get();
+			return Ok(companies);
+		}
+
 		[HttpPost("search")]
 		public IActionResult Post()
 		{
