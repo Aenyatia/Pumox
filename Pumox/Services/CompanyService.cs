@@ -20,7 +20,7 @@ namespace Pumox.Services
 
 		}
 
-		public void CreateCompany(CreateCompany command)
+		public Company CreateCompany(CreateCompany command)
 		{
 			var company = new Company
 			{
@@ -31,6 +31,8 @@ namespace Pumox.Services
 
 			_context.Companies.Add(company);
 			_context.SaveChanges();
+
+			return company;
 		}
 
 		public void UpdateCompany(long companyId, UpdateCompany command)
