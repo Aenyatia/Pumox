@@ -2,9 +2,11 @@
 using Pumox.Commands;
 using Pumox.Domain;
 using Pumox.Infrastructure;
+using Pumox.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CompanyName = Pumox.Specifications.CompanyName;
 
 namespace Pumox.Services
 {
@@ -68,9 +70,44 @@ namespace Pumox.Services
 			}
 		}
 
-		public void SearchCompany()
+		public IEnumerable<Company> SearchCompany(SearchCriteria criteria)
 		{
+			Specification<Company> a = Specification<Company>.True;
 
+			if (!string.IsNullOrWhiteSpace(criteria.Keyword))
+			{
+				a = a.And(new CompanyName(criteria.Keyword));
+			}
+
+			if (criteria.DateFrom.HasValue)
+			{
+				a = a.And(new EmployeeBirthFrom(criteria.DateFrom.Value));
+			}
+
+			if (criteria.DateTo.HasValue)
+			{
+				a = a.And(new EmployeeBirthTo(criteria.DateTo.Value));
+			}
+
+			if (criteria.Titles.Any())
+			{
+				Specification<Company> or = Specification<Company>.False;
+				foreach (var title in criteria.Titles)
+					//or = or.Or(new EmployeeJobTitle(title));
+					or = or.Or(null);
+				a = a.And(or);
+			}
+
+			Specification<Company> x = new BaseFalse<Company>();
+			x = x.Or(new EmployeeJobTitle(JobTitle.Administrator));
+			var y = new EmployeeJobTitle(JobTitle.Architect);
+			var x1 = new EmployeeJobTitle(JobTitle.Developer);
+			var z = x.Or(y).Or(x1);
+
+			return _context.Companies
+				.Include(c => c.Employees)
+				.Where(a.ToExpression())
+				.ToList();
 		}
 
 		public IEnumerable<Company> Get()

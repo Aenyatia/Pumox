@@ -24,9 +24,11 @@ namespace Pumox.Controllers
 		}
 
 		[HttpPost("search")]
-		public IActionResult Post()
+		public IActionResult Post(SearchCriteria criteria)
 		{
-			return Ok();
+			var result = _companyService.SearchCompany(criteria);
+
+			return Ok(result);
 		}
 
 		[HttpPost("create")]
