@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pumox.CQRS.Handlers
 {
-	public class CreateCompanyHandler : ICommandHandler<CreateCompanyCommand>
+	public class DeleteCompanyHandler : ICommandHandler<DeleteCompanyCommand>
 	{
-		public Task<IResult> Handle(CreateCompanyCommand command)
+		public Task<IResult> Handle(DeleteCompanyCommand command)
 		{
 			throw new NotImplementedException();
 		}

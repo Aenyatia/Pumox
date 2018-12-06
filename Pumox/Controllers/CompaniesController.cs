@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pumox.Commands;
-using Pumox.Query;
-using Pumox.Services;
+using Pumox.CQRS.Commands;
+using Pumox.CQRS.Core.Command;
+using Pumox.CQRS.Core.Query;
+using Pumox.CQRS.Queries;
 
 namespace Pumox.Controllers
 {
@@ -9,49 +10,43 @@ namespace Pumox.Controllers
 	[ApiController]
 	public class CompaniesController : ControllerBase
 	{
-		private readonly CompanyService _companyService;
+		private readonly ICommandDispatcher _commandDispatcher;
+		private readonly IQueryDispatcher _queryDispatcher;
 
-		public CompaniesController(CompanyService companyService)
+		public CompaniesController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
 		{
-			_companyService = companyService;
-		}
-
-		// test method
-		[HttpGet]
-		public IActionResult Get()
-		{
-			var companies = _companyService.Get();
-			return Ok(companies);
+			_commandDispatcher = commandDispatcher;
+			_queryDispatcher = queryDispatcher;
 		}
 
 		[HttpPost("search")]
-		public IActionResult Post(SearchCriteria criteria)
+		public IActionResult Post(SearchCompanyQuery query)
 		{
-			var result = _companyService.SearchCompany(criteria);
+			var result = _queryDispatcher.Dispatch(query);
 
-			return Ok(result);
+			return Ok();
 		}
 
 		[HttpPost("create")]
-		public IActionResult Post(CreateCompany command)
+		public IActionResult Post(CreateCompanyCommand command)
 		{
-			var company = _companyService.CreateCompany(command);
+			var result = _commandDispatcher.Dispatch(command);
 
-			return Created(string.Empty, company.Id);
+			return Created(string.Empty, null);
 		}
 
 		[HttpPut("update/{id:long}")]
-		public IActionResult Put(long id, UpdateCompany company)
+		public IActionResult Put(long id, UpdateCompanyCommand command)
 		{
-			_companyService.UpdateCompany(id, company);
+			var result = _commandDispatcher.Dispatch(command);
 
 			return NoContent();
 		}
 
 		[HttpDelete("delete/{id:long}")]
-		public IActionResult Delete(long id)
+		public IActionResult Delete(long id, DeleteCompanyCommand command)
 		{
-			_companyService.DeleteCompany(id);
+			var result = _commandDispatcher.Dispatch(command);
 
 			return NoContent();
 		}

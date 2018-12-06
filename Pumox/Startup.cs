@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pumox.Infrastructure.EntityFramework;
-using Pumox.Services;
 
 namespace Pumox
 {
@@ -22,8 +21,6 @@ namespace Pumox
 
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseInMemoryDatabase("Pumox"));
-
-			services.AddScoped<CompanyService>();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

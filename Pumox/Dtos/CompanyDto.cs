@@ -6,6 +6,6 @@ namespace Pumox.Dtos
 	{
 		public string Name { get; set; }
 		public int EstablishmentYear { get; set; }
-		public IEnumerable<EmployeeDto> Employees { get; set; } = new HashSet<EmployeeDto>();
+		public IEnumerable<EmployeeDto> Employees { get; set; }
 	}
 }
