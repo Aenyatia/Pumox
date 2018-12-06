@@ -6,6 +6,7 @@ using Pumox.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using CompanyName = Pumox.Specifications.CompanyName;
 
 namespace Pumox.Services
@@ -72,7 +73,7 @@ namespace Pumox.Services
 
 		public IEnumerable<Company> SearchCompany(SearchCriteria criteria)
 		{
-			Specification<Company> a = Specification<Company>.True;
+			Specification<Company> a = Specification<Company>.AllTrue;
 
 			if (!string.IsNullOrWhiteSpace(criteria.Keyword))
 			{
@@ -91,18 +92,14 @@ namespace Pumox.Services
 
 			if (criteria.Titles.Any())
 			{
-				Specification<Company> or = Specification<Company>.False;
+				Specification<Company> or = Specification<Company>.AllFalse;
 				foreach (var title in criteria.Titles)
-					//or = or.Or(new EmployeeJobTitle(title));
-					or = or.Or(null);
+					or = or.Or(new EmployeeJobTitle(title));
 				a = a.And(or);
 			}
 
-			Specification<Company> x = new BaseFalse<Company>();
-			x = x.Or(new EmployeeJobTitle(JobTitle.Administrator));
-			var y = new EmployeeJobTitle(JobTitle.Architect);
-			var x1 = new EmployeeJobTitle(JobTitle.Developer);
-			var z = x.Or(y).Or(x1);
+			Specification<Company> x = null;
+			x = x.And(a);
 
 			return _context.Companies
 				.Include(c => c.Employees)
@@ -151,6 +148,21 @@ namespace Pumox.Services
 
 			_context.Remove(company);
 			_context.SaveChanges();
+		}
+	}
+
+	public class A : Specification<Company>
+	{
+		private readonly DateTime _date;
+
+		public A(DateTime date)
+		{
+			_date = date;
+		}
+
+		public override Expression<Func<Company, bool>> ToExpression()
+		{
+			return c => c.Employees.Any(e => e.DateOfBirth >= _date);
 		}
 	}
 }

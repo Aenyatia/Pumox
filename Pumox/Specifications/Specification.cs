@@ -5,15 +5,14 @@ using System.Linq.Expressions;
 
 namespace Pumox.Specifications
 {
-	public sealed class BaseTrue<T> : Specification<T>
+	internal sealed class AllTrue<T> : Specification<T>
 	{
 		public override Expression<Func<T, bool>> ToExpression()
 		{
 			return T => true;
 		}
 	}
-
-	public sealed class BaseFalse<T> : Specification<T>
+	internal sealed class AllFalse<T> : Specification<T>
 	{
 		public override Expression<Func<T, bool>> ToExpression()
 		{
@@ -21,19 +20,10 @@ namespace Pumox.Specifications
 		}
 	}
 
-	public interface ISpecification<T>
+	public abstract class Specification<T>
 	{
-		Expression<Func<T, bool>> ToExpression();
-		bool IsSatisfiedBy(T entity);
-		Specification<T> And(Specification<T> specification);
-		Specification<T> Or(Specification<T> specification);
-		Specification<T> Not();
-	}
-
-	public abstract class Specification<T> : ISpecification<T>
-	{
-		public static readonly Specification<T> True = new BaseTrue<T>();
-		public static readonly Specification<T> False = new BaseFalse<T>();
+		public static readonly Specification<T> AllTrue = new AllTrue<T>();
+		public static readonly Specification<T> AllFalse = new AllFalse<T>();
 
 		public abstract Expression<Func<T, bool>> ToExpression();
 
@@ -44,26 +34,38 @@ namespace Pumox.Specifications
 			return predicate(entity);
 		}
 
-		public Specification<T> And(Specification<T> specification)
+		public Specification<T> And(Specification<T> right)
 		{
-			if (this == True)
-				return specification;
+			if (ReferenceEquals(right, null))
+				throw new NullReferenceException();
 
-			if (specification == True)
+			if (ReferenceEquals(this, AllFalse) || ReferenceEquals(right, AllFalse))
+				return AllFalse;
+
+			if (ReferenceEquals(this, AllTrue))
+				return right;
+
+			if (ReferenceEquals(right, AllTrue))
 				return this;
 
-			return new AndSpecification<T>(this, specification);
+			return new AndSpecification<T>(this, right);
 		}
 
-		public Specification<T> Or(Specification<T> specification)
+		public Specification<T> Or(Specification<T> right)
 		{
-			if (this == False)
-				return specification;
+			if (ReferenceEquals(right, null))
+				throw new NullReferenceException();
 
-			//if (this == True || specification == True)
-			//	return True;
+			if (ReferenceEquals(this, AllFalse))
+				return right;
 
-			return new OrSpecification<T>(this, specification);
+			if (ReferenceEquals(right, AllFalse))
+				return this;
+
+			if (ReferenceEquals(this, AllTrue) || ReferenceEquals(right, AllTrue))
+				return AllTrue;
+
+			return new OrSpecification<T>(this, right);
 		}
 
 		public Specification<T> Not()
@@ -72,7 +74,7 @@ namespace Pumox.Specifications
 		}
 	}
 
-	public sealed class AndSpecification<T> : Specification<T>
+	internal sealed class AndSpecification<T> : Specification<T>
 	{
 		private readonly Specification<T> _left;
 		private readonly Specification<T> _right;
@@ -85,15 +87,15 @@ namespace Pumox.Specifications
 
 		public override Expression<Func<T, bool>> ToExpression()
 		{
-			var left = _left.ToExpression();
-			var right = _right.ToExpression();
+			Expression<Func<T, bool>> left = _left.ToExpression();
+			Expression<Func<T, bool>> right = _right.ToExpression();
 
-			var invokedExpression = Expression.Invoke(right, left.Parameters);
+			InvocationExpression invocationExpression = Expression.Invoke(right, left.Parameters);
 
-			return (Expression<Func<T, bool>>)Expression.Lambda(Expression.AndAlso(left.Body, invokedExpression), left.Parameters);
+			return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(left.Body, invocationExpression), left.Parameters);
 		}
 	}
-	public sealed class OrSpecification<T> : Specification<T>
+	internal sealed class OrSpecification<T> : Specification<T>
 	{
 		private readonly Specification<T> _left;
 		private readonly Specification<T> _right;
@@ -106,16 +108,15 @@ namespace Pumox.Specifications
 
 		public override Expression<Func<T, bool>> ToExpression()
 		{
-			var left = _left.ToExpression();
-			var right = _right.ToExpression();
+			Expression<Func<T, bool>> left = _left.ToExpression();
+			Expression<Func<T, bool>> right = _right.ToExpression();
 
-			var invokedExpression = Expression.Invoke(right, left.Parameters);
+			InvocationExpression invocationExpression = Expression.Invoke(right, left.Parameters);
 
-			return (Expression<Func<T, bool>>)Expression.Lambda(Expression.OrElse(left.Body, invokedExpression), left.Parameters);
-
+			return Expression.Lambda<Func<T, bool>>(Expression.OrElse(left.Body, invocationExpression), left.Parameters);
 		}
 	}
-	public sealed class NotSpecification<T> : Specification<T>
+	internal sealed class NotSpecification<T> : Specification<T>
 	{
 		private readonly Specification<T> _specification;
 
@@ -126,11 +127,9 @@ namespace Pumox.Specifications
 
 		public override Expression<Func<T, bool>> ToExpression()
 		{
-			var expression = _specification.ToExpression();
+			Expression<Func<T, bool>> expression = _specification.ToExpression();
 
-			var notExpression = Expression.Not(expression.Body);
-
-			return Expression.Lambda<Func<T, bool>>(notExpression, expression.Parameters.Single());
+			return Expression.Lambda<Func<T, bool>>(Expression.Not(expression.Body), expression.Parameters);
 		}
 	}
 
