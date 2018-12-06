@@ -2,12 +2,11 @@
 using Pumox.Commands;
 using Pumox.Domain;
 using Pumox.Infrastructure;
-using Pumox.Specifications;
+using Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using CompanyName = Pumox.Specifications.CompanyName;
 
 namespace Pumox.Services
 {
@@ -75,28 +74,28 @@ namespace Pumox.Services
 		{
 			Specification<Company> a = Specification<Company>.AllTrue;
 
-			if (!string.IsNullOrWhiteSpace(criteria.Keyword))
-			{
-				a = a.And(new CompanyName(criteria.Keyword));
-			}
+			//if (!string.IsNullOrWhiteSpace(criteria.Keyword))
+			//{
+			//	a = a.And(new CompanyName(criteria.Keyword));
+			//}
 
-			if (criteria.DateFrom.HasValue)
-			{
-				a = a.And(new EmployeeBirthFrom(criteria.DateFrom.Value));
-			}
+			//if (criteria.DateFrom.HasValue)
+			//{
+			//	a = a.And(new EmployeeBirthFrom(criteria.DateFrom.Value));
+			//}
 
-			if (criteria.DateTo.HasValue)
-			{
-				a = a.And(new EmployeeBirthTo(criteria.DateTo.Value));
-			}
+			//if (criteria.DateTo.HasValue)
+			//{
+			//	a = a.And(new EmployeeBirthTo(criteria.DateTo.Value));
+			//}
 
-			if (criteria.Titles.Any())
-			{
-				Specification<Company> or = Specification<Company>.AllFalse;
-				foreach (var title in criteria.Titles)
-					or = or.Or(new EmployeeJobTitle(title));
-				a = a.And(or);
-			}
+			//if (criteria.Titles.Any())
+			//{
+			//	Specification<Company> or = Specification<Company>.AllFalse;
+			//	foreach (var title in criteria.Titles)
+			//		or = or.Or(new EmployeeJobTitle(title));
+			//	a = a.And(or);
+			//}
 
 			Specification<Company> x = null;
 			x = x.And(a);
