@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pumox.Commands;
+using Pumox.Query;
 using Pumox.Services;
 
 namespace Pumox.Controllers

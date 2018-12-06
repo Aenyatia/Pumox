@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pumox.Commands;
 using Pumox.Domain;
-using Pumox.Infrastructure;
-using Specification;
+using Pumox.Infrastructure.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Pumox.Query;
 
 namespace Pumox.Services
 {
@@ -18,17 +18,19 @@ namespace Pumox.Services
 		{
 			_context = context;
 
-			if (!context.Companies.Any())
+			if (!_context.Companies.Any())
 			{
-				_context.Companies.AddRange(
+				_context.AddRange(
 					new Company
 					{
+						Id = 1,
 						Name = "Company One",
 						EstablishmentYear = 2000,
 						Employees = new List<Employee>
 						{
 							new Employee
 							{
+								Id = 1,
 								FirstName = "First One",
 								LastName = "Last One",
 								DateOfBirth = new DateTime(1920, 10, 12),
@@ -36,8 +38,42 @@ namespace Pumox.Services
 							},
 							new Employee
 							{
+								Id = 2,
 								FirstName = "First Two",
 								LastName = "Last Two",
+								DateOfBirth = new DateTime(1994, 06, 15),
+								JobTitle = JobTitle.Manager
+							},
+							new Employee
+							{
+								Id = 3,
+								FirstName = "First Three",
+								LastName = "Last Three",
+								DateOfBirth = new DateTime(2000, 10, 30),
+								JobTitle = JobTitle.Architect
+							}
+						}
+					},
+					new Company
+					{
+						Id = 2,
+						Name = "Company Two",
+						EstablishmentYear = 2010,
+						Employees = new List<Employee>
+						{
+							new Employee
+							{
+								Id = 4,
+								FirstName = "First Three",
+								LastName = "Last Three",
+								DateOfBirth = new DateTime(1920, 10, 12),
+								JobTitle = JobTitle.Developer
+							},
+							new Employee
+							{
+								Id = 5,
+								FirstName = "First Four",
+								LastName = "Last Four",
 								DateOfBirth = new DateTime(1994, 06, 15),
 								JobTitle = JobTitle.Manager
 							}
@@ -45,34 +81,28 @@ namespace Pumox.Services
 					},
 					new Company
 					{
-						Name = "Company Two",
+						Id = 3,
+						Name = "Company Three",
 						EstablishmentYear = 2010,
 						Employees = new List<Employee>
 						{
 							new Employee
 							{
+								Id = 6,
 								FirstName = "First Three",
 								LastName = "Last Three",
 								DateOfBirth = new DateTime(1920, 10, 12),
 								JobTitle = JobTitle.Administrator
-							},
-							new Employee
-							{
-								FirstName = "First Three",
-								LastName = "Last Three",
-								DateOfBirth = new DateTime(1994, 06, 15),
-								JobTitle = JobTitle.Manager
 							}
 						}
-					}
-				);
+					});
 				_context.SaveChanges();
 			}
 		}
 
 		public IEnumerable<Company> SearchCompany(SearchCriteria criteria)
 		{
-			Specification<Company> a = Specification<Company>.AllTrue;
+			Specifications.Core.Specification<Company> a = Specifications.Core.Specification<Company>.AllTrue;
 
 			//if (!string.IsNullOrWhiteSpace(criteria.Keyword))
 			//{
@@ -97,7 +127,7 @@ namespace Pumox.Services
 			//	a = a.And(or);
 			//}
 
-			Specification<Company> x = null;
+			Specifications.Core.Specification<Company> x = null;
 			x = x.And(a);
 
 			return _context.Companies
@@ -150,7 +180,7 @@ namespace Pumox.Services
 		}
 	}
 
-	public class A : Specification<Company>
+	public class A : Specifications.Core.Specification<Company>
 	{
 		private readonly DateTime _date;
 

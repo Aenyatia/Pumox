@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pumox.Infrastructure;
+using Pumox.Infrastructure.EntityFramework;
 using Pumox.Services;
 
 namespace Pumox
@@ -18,7 +18,7 @@ namespace Pumox
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseInMemoryDatabase("Pumox"));

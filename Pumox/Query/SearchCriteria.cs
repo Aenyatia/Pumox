@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Pumox.Domain;
 
-namespace Pumox
+namespace Pumox.Query
 {
 	public class SearchCriteria
 	{

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pumox.Domain;
 
-namespace Pumox.Infrastructure
+namespace Pumox.Infrastructure.EntityFramework
 {
 	public class ApplicationDbContext : DbContext
 	{
@@ -11,5 +11,10 @@ namespace Pumox.Infrastructure
 			: base(options)
 		{
 		}
+
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+		//	modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+		//}
 	}
 }
