@@ -1,24 +1,35 @@
-﻿using System;
-using System.Threading.Tasks;
-using Pumox.CommandsQueries.Commands;
+﻿using Pumox.CommandsQueries.Commands;
 using Pumox.CommandsQueries.Core;
 using Pumox.CommandsQueries.Core.Command;
 using Pumox.Domain;
+using System.Threading.Tasks;
 
 namespace Pumox.CommandsQueries.Handlers
 {
 	public class UpdateCompanyCommandHandler : ICommandHandler<UpdateCompanyCommand>
 	{
-		private readonly ICompanyRepository _companyRepository;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public UpdateCompanyCommandHandler(ICompanyRepository companyRepository)
+		public UpdateCompanyCommandHandler(IUnitOfWork unitOfWork)
 		{
-			_companyRepository = companyRepository;
+			_unitOfWork = unitOfWork;
 		}
 
-		public Task<IResult> Handle(UpdateCompanyCommand command)
+		public async Task<IResult> Handle(UpdateCompanyCommand command)
 		{
-			throw new NotImplementedException();
+			var id = 1;
+			var company = _unitOfWork.Companies.GetCompanyById(1);
+			if (company == null)
+				return new Result();
+
+			company.Name = company.Name;
+			company.EstablishmentYear = company.EstablishmentYear;
+			company.Employees = company.Employees;
+
+			await Task.CompletedTask;
+			_unitOfWork.Commit();
+
+			return new Result();
 		}
 	}
 }

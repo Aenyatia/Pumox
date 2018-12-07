@@ -1,24 +1,32 @@
-﻿using System;
-using System.Threading.Tasks;
-using Pumox.CommandsQueries.Commands;
+﻿using Pumox.CommandsQueries.Commands;
 using Pumox.CommandsQueries.Core;
 using Pumox.CommandsQueries.Core.Command;
 using Pumox.Domain;
+using System.Threading.Tasks;
 
 namespace Pumox.CommandsQueries.Handlers
 {
 	public class DeleteCompanyCommandHandler : ICommandHandler<DeleteCompanyCommand>
 	{
-		private readonly ICompanyRepository _companyRepository;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public DeleteCompanyCommandHandler(ICompanyRepository companyRepository)
+		public DeleteCompanyCommandHandler(IUnitOfWork unitOfWork)
 		{
-			_companyRepository = companyRepository;
+			_unitOfWork = unitOfWork;
 		}
 
-		public Task<IResult> Handle(DeleteCompanyCommand command)
+		public async Task<IResult> Handle(DeleteCompanyCommand command)
 		{
-			throw new NotImplementedException();
+			var company = _unitOfWork.Companies.GetCompanyById(command.CompanyId);
+			if (company == null)
+				return new Result();
+
+			_unitOfWork.Companies.Remove(company);
+			_unitOfWork.Commit();
+
+			await Task.CompletedTask;
+
+			return new Result();
 		}
 	}
 }
