@@ -1,4 +1,4 @@
-﻿namespace Pumox.CQRS.Core.Command
+﻿namespace Pumox.CommandsQueries.Core.Command
 {
 	// marker interface
 	public interface ICommand

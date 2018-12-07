@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pumox.CQRS.Commands;
-using Pumox.CQRS.Core.Command;
-using Pumox.CQRS.Core.Query;
-using Pumox.CQRS.Queries;
+using Pumox.CommandsQueries.Commands;
+using Pumox.CommandsQueries.Core.Command;
+using Pumox.CommandsQueries.Core.Query;
+using Pumox.CommandsQueries.Queries;
 
 namespace Pumox.Controllers
 {
@@ -19,7 +19,7 @@ namespace Pumox.Controllers
 			_queryDispatcher = queryDispatcher;
 		}
 
-		[HttpPost("search")]
+		[HttpGet("search")]
 		public IActionResult Post(SearchCompanyQuery query)
 		{
 			var result = _queryDispatcher.Dispatch(query);

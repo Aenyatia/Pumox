@@ -1,8 +1,8 @@
-﻿using Pumox.CQRS.Core.Command;
+﻿using System.Collections.Generic;
+using Pumox.CommandsQueries.Core.Command;
 using Pumox.Domain;
-using System.Collections.Generic;
 
-namespace Pumox.CQRS.Commands
+namespace Pumox.CommandsQueries.Commands
 {
 	public class UpdateCompanyCommand : ICommand
 	{

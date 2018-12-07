@@ -21,6 +21,7 @@ namespace Pumox
 
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseInMemoryDatabase("Pumox"));
+
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

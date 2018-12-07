@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Pumox.CQRS.Core.Query
+namespace Pumox.CommandsQueries.Core.Query
 {
 	public class QueryDispatcher : IQueryDispatcher
 	{
