@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pumox", "Pumox\Pumox.csproj", "{F765114F-A4F3-4BC8-8A1C-75219143980A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pumox", "Pumox\Pumox.csproj", "{F765114F-A4F3-4BC8-8A1C-75219143980A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pumox.Infrastructure", "Pumox.Infrastructure\Pumox.Infrastructure.csproj", "{40330533-0629-45EA-8668-7AC057F1E23E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pumox.Core", "Pumox.Core\Pumox.Core.csproj", "{1944DD60-F146-4068-86B2-FE202683B6C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pumox.Application", "Pumox.Application\Pumox.Application.csproj", "{9AF372FA-A711-47FA-8D15-FDA4888FAC0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{F765114F-A4F3-4BC8-8A1C-75219143980A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F765114F-A4F3-4BC8-8A1C-75219143980A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F765114F-A4F3-4BC8-8A1C-75219143980A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40330533-0629-45EA-8668-7AC057F1E23E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40330533-0629-45EA-8668-7AC057F1E23E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40330533-0629-45EA-8668-7AC057F1E23E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40330533-0629-45EA-8668-7AC057F1E23E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1944DD60-F146-4068-86B2-FE202683B6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1944DD60-F146-4068-86B2-FE202683B6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1944DD60-F146-4068-86B2-FE202683B6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1944DD60-F146-4068-86B2-FE202683B6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AF372FA-A711-47FA-8D15-FDA4888FAC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF372FA-A711-47FA-8D15-FDA4888FAC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF372FA-A711-47FA-8D15-FDA4888FAC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF372FA-A711-47FA-8D15-FDA4888FAC0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

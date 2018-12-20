@@ -5,15 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\NHibernate\" />
-    <Folder Include="Validators\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pumox.Application\Pumox.Application.csproj" />
+    <ProjectReference Include="..\Pumox.Infrastructure\Pumox.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
