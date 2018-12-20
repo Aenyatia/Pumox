@@ -1,4 +1,4 @@
-﻿namespace Pumox.CommandsQueries.Core
+﻿namespace Pumox.CQS.Core
 {
 	public class Result : IResult
 	{

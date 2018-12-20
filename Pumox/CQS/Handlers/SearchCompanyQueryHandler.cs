@@ -1,13 +1,13 @@
-﻿using Pumox.CommandsQueries.Core;
-using Pumox.CommandsQueries.Core.Query;
-using Pumox.CommandsQueries.Queries;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Pumox.CQS.Core;
+using Pumox.CQS.Core.Query;
+using Pumox.CQS.Queries;
 using Pumox.Domain;
 using Pumox.Specifications;
 using Pumox.Specifications.Core;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Pumox.CommandsQueries.Handlers
+namespace Pumox.CQS.Handlers
 {
 	public class SearchCompanyQueryHandler : IQueryHandler<SearchCompanyQuery>
 	{

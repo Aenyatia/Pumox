@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Pumox.CommandsQueries.Core.Command
+namespace Pumox.CQS.Core.Command
 {
 	public interface ICommandDispatcher
 	{

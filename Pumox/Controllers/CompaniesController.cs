@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pumox.CommandsQueries.Commands;
-using Pumox.CommandsQueries.Core.Command;
-using Pumox.CommandsQueries.Core.Query;
-using Pumox.CommandsQueries.Queries;
+using Pumox.CQS.Commands;
+using Pumox.CQS.Core.Command;
+using Pumox.CQS.Core.Query;
+using Pumox.CQS.Queries;
 
 namespace Pumox.Controllers
 {

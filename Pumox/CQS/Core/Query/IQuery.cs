@@ -1,4 +1,4 @@
-﻿namespace Pumox.CommandsQueries.Core.Query
+﻿namespace Pumox.CQS.Core.Query
 {
 	// marker interface
 	public interface IQuery

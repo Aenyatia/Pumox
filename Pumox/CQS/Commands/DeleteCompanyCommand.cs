@@ -1,6 +1,6 @@
-﻿using Pumox.CommandsQueries.Core.Command;
+﻿using Pumox.CQS.Core.Command;
 
-namespace Pumox.CommandsQueries.Commands
+namespace Pumox.CQS.Commands
 {
 	public class DeleteCompanyCommand : ICommand
 	{

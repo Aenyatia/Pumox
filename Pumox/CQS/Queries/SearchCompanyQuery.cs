@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pumox.CommandsQueries.Core.Query;
+using Pumox.CQS.Core.Query;
 using Pumox.Domain;
 
-namespace Pumox.CommandsQueries.Queries
+namespace Pumox.CQS.Queries
 {
 	public class SearchCompanyQuery : IQuery
 	{

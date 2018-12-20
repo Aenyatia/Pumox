@@ -15,7 +15,6 @@ namespace Pumox.Specifications
 			_lastName = lastName;
 		}
 
-
 		public override Expression<Func<Company, bool>> ToExpression()
 		{
 			return c => c.Employees.Any(e => e.LastName.Contains(_lastName));

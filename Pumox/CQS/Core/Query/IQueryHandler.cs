@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Pumox.CommandsQueries.Core.Query
+namespace Pumox.CQS.Core.Query
 {
 	public interface IQueryHandler<in TQuery> where TQuery : IQuery
 	{
