@@ -1,10 +1,7 @@
 ﻿using Pumox.Application.Commands;
-using Pumox.Core.Domain;
 using Pumox.Core.Repositories;
 using Pumox.Infrastructure.CQS.Commands;
 using Pumox.Infrastructure.CQS.Results;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pumox.Application.CommandsHandlers
@@ -20,27 +17,27 @@ namespace Pumox.Application.CommandsHandlers
 
 		public async Task<ICommandResult> Handle(UpdateCompanyCommand command)
 		{
-			var company = await _unitOfWork.Companies.GetCompanyById(command.Id);
-			if (company == null)
-				return new CommandResult { Succeeded = false };
+			//var company = await _unitOfWork.Companies.GetCompanyById(command.Id);
+			//if (company == null)
+			//	return new CommandResult { Succeeded = false };
 
-			IList<Employee> employeesList = command.CompanyDto.Employees
-				.Select(employeeDto => new Employee
-				{
-					FirstName = employeeDto.FirstName,
-					LastName = employeeDto.LastName,
-					DateOfBirth = employeeDto.DateOfBirth,
-					JobTitle = employeeDto.JobTitle
-				})
-				.ToList();
+			//IList<Employee> employeesList = command.CompanyDto.Employees
+			//	.Select(employeeDto => new Employee
+			//	{
+			//		FirstName = employeeDto.FirstName,
+			//		LastName = employeeDto.LastName,
+			//		DateOfBirth = employeeDto.DateOfBirth,
+			//		JobTitle = employeeDto.JobTitle
+			//	})
+			//	.ToList();
 
-			company.Name = command.CompanyDto.Name;
-			company.EstablishmentYear = command.CompanyDto.EstablishmentYear;
-			company.Employees = employeesList;
+			//company.Name = command.CompanyDto.Name;
+			//company.EstablishmentYear = command.CompanyDto.EstablishmentYear;
+			//company.Employees = employeesList;
 
-			await _unitOfWork.Commit();
+			//await _unitOfWork.Commit();
 
-			return new CommandResult { Succeeded = true };
+			return CommandResult.Ok();
 		}
 	}
 }

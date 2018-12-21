@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Pumox.Core.Domain;
 using Pumox.Core.Repositories;
 using Pumox.Core.Specifications.Core;
@@ -17,7 +18,7 @@ namespace Pumox.Infrastructure.EntityFramework.Repositories
 			_context = context;
 		}
 
-		public async Task<Company> GetCompanyById(long id)
+		public async Task<Company> GetCompanyById(Guid id)
 		{
 			return await _context.Companies.SingleOrDefaultAsync(c => c.Id == id);
 		}

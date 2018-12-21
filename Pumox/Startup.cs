@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pumox.Application;
 using Pumox.Core.Repositories;
@@ -16,15 +16,15 @@ namespace Pumox
 {
 	public class Startup
 	{
-		public IConfiguration Configuration { get; }
-		public IContainer ApplicationContainer { get; private set; }
-
-		public Startup(IConfiguration configuration)
-			=> Configuration = configuration;
-
 		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services.AddMvc()
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+				.AddFluentValidation(options =>
+				{
+					options.RegisterValidatorsFromAssemblyContaining<Startup>();
+					options.LocalizationEnabled = false;
+				});
 
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseInMemoryDatabase("Pumox"));
@@ -35,7 +35,7 @@ namespace Pumox
 
 			// register modules
 			builder.RegisterModule<CqsModule>();
-			builder.RegisterType<CompanyRepository>()
+			builder.RegisterType<Fake>()
 				.As<ICompanyRepository>()
 				.InstancePerLifetimeScope();
 
@@ -43,8 +43,7 @@ namespace Pumox
 				.As<IUnitOfWork>()
 				.InstancePerLifetimeScope();
 
-			ApplicationContainer = builder.Build();
-			return new AutofacServiceProvider(ApplicationContainer);
+			return new AutofacServiceProvider(builder.Build());
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)

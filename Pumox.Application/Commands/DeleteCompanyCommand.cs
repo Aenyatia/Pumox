@@ -1,9 +1,10 @@
-﻿using Pumox.Infrastructure.CQS.Commands;
+﻿using System;
+using Pumox.Infrastructure.CQS.Commands;
 
 namespace Pumox.Application.Commands
 {
 	public class DeleteCompanyCommand : ICommand
 	{
-		public long CompanyId { get; set; }
+		public Guid CompanyId { get; set; }
 	}
 }

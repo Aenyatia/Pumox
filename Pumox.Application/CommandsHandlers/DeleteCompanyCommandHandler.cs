@@ -19,12 +19,12 @@ namespace Pumox.Application.CommandsHandlers
 		{
 			var company = await _unitOfWork.Companies.GetCompanyById(command.CompanyId);
 			if (company == null)
-				return new CommandResult { Succeeded = false };
+				return CommandResult.Fail("Company not found.");
 
 			await _unitOfWork.Companies.Remove(company);
 			await _unitOfWork.Commit();
 
-			return new CommandResult { Succeeded = true };
+			return CommandResult.Ok();
 		}
 	}
 }
