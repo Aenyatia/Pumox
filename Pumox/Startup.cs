@@ -6,12 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Pumox.Application;
+using Pumox.Application.IoC;
 using Pumox.Infrastructure.EntityFramework;
-using Pumox.Infrastructure.EntityFramework.Repositories;
 using System;
-using Pumox.Core.Companies;
-using Pumox.Core.Shared;
 
 namespace Pumox
 {
@@ -36,13 +33,6 @@ namespace Pumox
 
 			// register modules
 			builder.RegisterModule<CqsModule>();
-			builder.RegisterType<Fake>()
-				.As<ICompanyRepository>()
-				.InstancePerLifetimeScope();
-
-			builder.RegisterType<UnitOfWork>()
-				.As<IUnitOfWork>()
-				.InstancePerLifetimeScope();
 
 			return new AutofacServiceProvider(builder.Build());
 		}

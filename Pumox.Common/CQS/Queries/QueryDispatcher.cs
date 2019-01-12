@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Autofac;
 using Pumox.Common.CQS.Results;
 
 namespace Pumox.Common.CQS.Queries

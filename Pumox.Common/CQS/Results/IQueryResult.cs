@@ -2,6 +2,5 @@
 {
 	public interface IQueryResult
 	{
-		object Data { get; }
 	}
 }

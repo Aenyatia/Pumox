@@ -1,10 +1,9 @@
-﻿using Pumox.Core.Domain;
+﻿using Pumox.Common.CQS.Queries;
+using Pumox.Core.Employees;
 using System;
 using System.Collections.Generic;
-using Pumox.Common.CQS.Queries;
-using Pumox.Core.Employees;
 
-namespace Pumox.Application.Queries
+namespace Pumox.Application.Companies.Queries
 {
 	public class SearchCompanyQuery : IQuery
 	{

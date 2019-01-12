@@ -58,7 +58,7 @@ namespace Pumox.Core.Companies
 				throw new Exception("Company name is required.");
 
 			if (estabishmentYear <= 0)
-				throw new Exception("Establishment year should be greater then 0.");
+				throw new ArgumentOutOfRangeException(nameof(estabishmentYear), "Establishment year should be greater then 0.");
 		}
 	}
 }

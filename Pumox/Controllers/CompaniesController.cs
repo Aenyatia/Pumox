@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pumox.Application.Commands;
-using Pumox.Application.Dtos;
-using Pumox.Application.Queries;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Pumox.Application.Companies.Commands;
+using Pumox.Application.Companies.Queries;
 using Pumox.Common.CQS.Commands;
 using Pumox.Common.CQS.Queries;
+using System;
+using System.Threading.Tasks;
 
 namespace Pumox.Controllers
 {
@@ -27,44 +25,31 @@ namespace Pumox.Controllers
 		public async Task<IActionResult> Post(SearchCompanyQuery query)
 		{
 			var result = await _queryDispatcher.Dispatch(query);
-			var x = (IEnumerable<CompanyDto>)result.Data;
-			return Ok(x);
+			return Ok(result);
 		}
 
 		[HttpPost("create")]
-		public async Task<IActionResult> Post(CreateCompanyCommand command)
+		public async Task<IActionResult> Post(CreateCompany command)
 		{
 			command.Id = Guid.NewGuid();
-			var result = await _commandDispatcher.Dispatch(command);
+			await _commandDispatcher.Dispatch(command);
 
-			if (!result.Succeeded)
-				return BadRequest(result.Errors);
-
-			return Created(string.Empty, command.Id);
+			return Created(command.Id.ToString(), command.Id.ToString());
 		}
 
-		[HttpPut("update/{id:long}")]
-		public async Task<IActionResult> Put(long id, CompanyDto dto)
+		[HttpPut("update/{id}")]
+		public async Task<IActionResult> Put(Guid id, UpdateCompany command)
 		{
-			var result = await _commandDispatcher.Dispatch(new UpdateCompanyCommand
-			{
-				Id = id,
-				CompanyDto = dto
-			});
-
-			if (!result.Succeeded)
-				return BadRequest();
+			command.Id = id;
+			await _commandDispatcher.Dispatch(command);
 
 			return NoContent();
 		}
 
-		[HttpDelete("delete/{id:long}")]
+		[HttpDelete("delete/{id}")]
 		public async Task<IActionResult> Delete(Guid id)
 		{
-			var result = await _commandDispatcher.Dispatch(new DeleteCompanyCommand { CompanyId = id });
-
-			if (!result.Succeeded)
-				return BadRequest();
+			await _commandDispatcher.Dispatch(new DeleteCompany { Id = id });
 
 			return NoContent();
 		}

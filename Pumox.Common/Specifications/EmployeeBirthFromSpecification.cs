@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Pumox.Common.Specifications.Core;
+using Pumox.Core.Companies;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
-using Pumox.Common.Specifications.Core;
 
 namespace Pumox.Common.Specifications
 {

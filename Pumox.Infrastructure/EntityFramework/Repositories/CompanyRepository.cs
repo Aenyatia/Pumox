@@ -1,11 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Pumox.Core.Domain;
-using Pumox.Core.Specifications.Core;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Pumox.Core.Companies;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Pumox.Infrastructure.EntityFramework.Repositories
 {
@@ -23,24 +20,27 @@ namespace Pumox.Infrastructure.EntityFramework.Repositories
 			return await _context.Companies.SingleOrDefaultAsync(c => c.Id == id);
 		}
 
-		public async Task<IEnumerable<Company>> Get(Specification<Company> specification)
+		public async Task<IEnumerable<Company>> GetAll()
 		{
-			return await _context.Companies
-				.Include(c => c.Employees)
-				.Where(specification.ToExpression())
-				.ToListAsync();
+			return await _context.Companies.ToListAsync();
 		}
 
 		public async Task Add(Company company)
 		{
-			await _context.Companies.AddAsync(company);
+			_context.Companies.Add(company);
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task Update(Company company)
+		{
+			_context.Companies.Update(company);
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task Remove(Company company)
 		{
 			_context.Companies.Remove(company);
-
-			await Task.CompletedTask;
+			await _context.SaveChangesAsync();
 		}
 	}
 }

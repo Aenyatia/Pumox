@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Pumox.Application.Employees;
+using System.Collections.Generic;
 
-namespace Pumox.Application.Dtos
+namespace Pumox.Application.Companies
 {
 	public class CompanyDto
 	{

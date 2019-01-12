@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Pumox.Core.Employees
+﻿namespace Pumox.Core.Employees
 {
-	public class EmployeeService : IEmployeeService
+	public sealed class EmployeeService : IEmployeeService
 	{
+		private readonly IEmployeeRepository _employeeRepository;
+
+		public EmployeeService(IEmployeeRepository employeeRepository)
+		{
+			_employeeRepository = employeeRepository;
+		}
 	}
 }
