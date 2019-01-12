@@ -1,5 +1,6 @@
 ﻿using Pumox.Core.Domain;
 using System;
+using Pumox.Core.Employees;
 
 namespace Pumox.Application.Dtos
 {

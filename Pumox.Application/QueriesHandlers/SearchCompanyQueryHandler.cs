@@ -1,13 +1,14 @@
 ﻿using Pumox.Application.Dtos;
 using Pumox.Application.Queries;
 using Pumox.Core.Domain;
-using Pumox.Core.Repositories;
-using Pumox.Core.Specifications;
-using Pumox.Core.Specifications.Core;
-using Pumox.Infrastructure.CQS.Queries;
-using Pumox.Infrastructure.CQS.Results;
 using System.Linq;
 using System.Threading.Tasks;
+using Pumox.Common.CQS.Queries;
+using Pumox.Common.CQS.Results;
+using Pumox.Common.Specifications;
+using Pumox.Common.Specifications.Core;
+using Pumox.Core.Companies;
+using Pumox.Core.Shared;
 
 namespace Pumox.Application.QueriesHandlers
 {

@@ -1,6 +1,6 @@
-﻿using Pumox.Infrastructure.CQS.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Pumox.Common.CQS.Commands;
 
 namespace Pumox.Application.Commands
 {

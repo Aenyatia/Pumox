@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pumox.Common\Pumox.Common.csproj" />
     <ProjectReference Include="..\Pumox.Core\Pumox.Core.csproj" />
     <ProjectReference Include="..\Pumox.Infrastructure\Pumox.Infrastructure.csproj" />
   </ItemGroup>

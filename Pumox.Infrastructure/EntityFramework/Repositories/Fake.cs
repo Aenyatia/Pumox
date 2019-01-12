@@ -1,9 +1,9 @@
 ﻿using Pumox.Core.Domain;
-using Pumox.Core.Repositories;
 using Pumox.Core.Specifications.Core;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Pumox.Core.Companies;
 
 namespace Pumox.Infrastructure.EntityFramework.Repositories
 {

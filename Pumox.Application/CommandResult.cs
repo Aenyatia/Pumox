@@ -1,5 +1,5 @@
-﻿using Pumox.Infrastructure.CQS.Results;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Pumox.Common.CQS.Results;
 
 namespace Pumox.Application
 {

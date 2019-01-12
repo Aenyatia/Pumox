@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NHibernate\**" />
+    <EmbeddedResource Remove="NHibernate\**" />
+    <None Remove="NHibernate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
@@ -17,10 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pumox.Core\Pumox.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NHibernate\" />
   </ItemGroup>
 
 </Project>

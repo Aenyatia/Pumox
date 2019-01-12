@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Pumox.Infrastructure.CQS.Commands;
-using Pumox.Infrastructure.CQS.Queries;
+using Pumox.Common.CQS.Commands;
+using Pumox.Common.CQS.Queries;
 
 namespace Pumox.Application
 {

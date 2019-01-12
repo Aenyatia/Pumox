@@ -1,5 +1,5 @@
 ﻿using System;
-using Pumox.Infrastructure.CQS.Commands;
+using Pumox.Common.CQS.Commands;
 
 namespace Pumox.Application.Commands
 {

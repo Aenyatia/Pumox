@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Pumox.Application;
-using Pumox.Core.Repositories;
 using Pumox.Infrastructure.EntityFramework;
 using Pumox.Infrastructure.EntityFramework.Repositories;
 using System;
+using Pumox.Core.Companies;
+using Pumox.Core.Shared;
 
 namespace Pumox
 {

@@ -1,8 +1,8 @@
 ﻿using Pumox.Application.Commands;
-using Pumox.Core.Repositories;
-using Pumox.Infrastructure.CQS.Commands;
-using Pumox.Infrastructure.CQS.Results;
 using System.Threading.Tasks;
+using Pumox.Common.CQS.Commands;
+using Pumox.Common.CQS.Results;
+using Pumox.Core.Shared;
 
 namespace Pumox.Application.CommandsHandlers
 {

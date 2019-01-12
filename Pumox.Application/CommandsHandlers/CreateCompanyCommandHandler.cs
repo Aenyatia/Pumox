@@ -1,14 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Pumox.Application.Commands;
-using Pumox.Core.Domain;
-using Pumox.Core.Repositories;
-using Pumox.Infrastructure.CQS.Commands;
-using Pumox.Infrastructure.CQS.Results;
 using Pumox.Infrastructure.EntityFramework.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Pumox.Common.CQS.Commands;
+using Pumox.Common.CQS.Results;
+using Pumox.Core.Companies;
+using Pumox.Core.Employees;
+using Pumox.Core.Shared;
+using Employee = Pumox.Core.Domain.Employee;
 
 namespace Pumox.Application.CommandsHandlers
 {

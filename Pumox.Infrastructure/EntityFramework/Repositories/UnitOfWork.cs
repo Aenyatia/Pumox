@@ -1,5 +1,6 @@
-﻿using Pumox.Core.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Pumox.Core.Companies;
+using Pumox.Core.Shared;
 
 namespace Pumox.Infrastructure.EntityFramework.Repositories
 {

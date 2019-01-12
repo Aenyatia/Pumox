@@ -2,6 +2,7 @@
 using Pumox.Core.Domain;
 using System;
 using System.Collections.Generic;
+using Pumox.Core.Companies;
 
 namespace Pumox.Infrastructure.EntityFramework
 {
