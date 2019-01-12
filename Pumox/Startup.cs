@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Pumox.Application.IoC;
+using Pumox.Core.Companies;
 using Pumox.Infrastructure.EntityFramework;
+using Pumox.Infrastructure.EntityFramework.Repositories;
 using System;
 
 namespace Pumox
@@ -26,6 +28,9 @@ namespace Pumox
 
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseInMemoryDatabase("Pumox"));
+
+			services.AddScoped<ICompanyService, CompanyService>();
+			services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 			// configure autofac
 			var builder = new ContainerBuilder();
