@@ -10,6 +10,7 @@ namespace Pumox.Core.Employees
 		public string LastName { get; private set; }
 		public DateTime DateOfBirth { get; private set; }
 		public JobTitle JobTitle { get; private set; }
+		public Address Address { get; private set; }
 		public DateTime CreatedAt { get; private set; }
 		public DateTime UpdatedAt { get; private set; }
 
@@ -34,6 +35,14 @@ namespace Pumox.Core.Employees
 			DateOfBirth = dateOfBirth;
 			JobTitle = jobTitle;
 			UpdatedAt = DateTime.UtcNow;
+		}
+
+		public void SetAddress(Address address)
+		{
+			if (address == null)
+				throw new ArgumentNullException(nameof(address));
+
+			Address = address;
 		}
 
 		private static void Validate(string firstName, string lastName, DateTime dateOfBirth)
