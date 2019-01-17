@@ -42,6 +42,9 @@ namespace Pumox.Core.Employees
 			if (address == null)
 				throw new ArgumentNullException(nameof(address));
 
+			if (Address == address)
+				return;
+
 			Address = address;
 		}
 
