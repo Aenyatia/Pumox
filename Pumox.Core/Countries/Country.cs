@@ -2,7 +2,7 @@
 using Pumox.Core.Extensions;
 using Pumox.Core.Shared;
 
-namespace Pumox.Core
+namespace Pumox.Core.Countries
 {
 	public class Country : Entity
 	{

@@ -2,6 +2,7 @@
 using Pumox.Core.Employees;
 using System;
 using System.Threading.Tasks;
+using Pumox.Core.Countries;
 
 namespace Pumox.Core.Extensions
 {
@@ -23,6 +24,15 @@ namespace Pumox.Core.Extensions
 				throw new Exception($"Employee with id: '{id}' was not found.");
 
 			return employee;
+		}
+
+		public static async Task<Country> GetOrFail(this ICountryRepository countryRepository, Guid id)
+		{
+			var country = await countryRepository.GetCountryById(id);
+			if (country == null)
+				throw new Exception($"Country with id: '{id}' was not found.");
+
+			return country;
 		}
 	}
 }
