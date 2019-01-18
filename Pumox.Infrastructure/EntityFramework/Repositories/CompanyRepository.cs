@@ -27,7 +27,7 @@ namespace Pumox.Infrastructure.EntityFramework.Repositories
 
 		public async Task Add(Company company)
 		{
-			_context.Companies.Add(company);
+			await _context.Companies.AddAsync(company);
 			await _context.SaveChangesAsync();
 		}
 

@@ -11,6 +11,7 @@ namespace Pumox.Core.Employees
 		public DateTime DateOfBirth { get; private set; }
 		public JobTitle JobTitle { get; private set; }
 		public Address Address { get; private set; }
+
 		public DateTime CreatedAt { get; private set; }
 		public DateTime UpdatedAt { get; private set; }
 
@@ -23,6 +24,7 @@ namespace Pumox.Core.Employees
 			LastName = lastName;
 			DateOfBirth = dateOfBirth;
 			JobTitle = jobTitle;
+
 			CreatedAt = DateTime.UtcNow;
 		}
 
@@ -34,6 +36,7 @@ namespace Pumox.Core.Employees
 			LastName = lastName;
 			DateOfBirth = dateOfBirth;
 			JobTitle = jobTitle;
+
 			UpdatedAt = DateTime.UtcNow;
 		}
 

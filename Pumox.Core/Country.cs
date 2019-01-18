@@ -1,19 +1,19 @@
-﻿using Pumox.Core.Extensions;
-using System;
+﻿using System;
+using Pumox.Core.Extensions;
+using Pumox.Core.Shared;
 
-namespace Pumox.Core.Employees
+namespace Pumox.Core
 {
-	public class Country
+	public class Country : Entity
 	{
-		public Guid Id { get; private set; }
 		public string Name { get; private set; }
 
 		public Country(Guid id, string name)
+			: base(id)
 		{
 			if (name.IsEmpty())
 				throw new ArgumentException("Country name is required.", nameof(name));
 
-			Id = id;
 			Name = name;
 		}
 	}
